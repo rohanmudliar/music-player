@@ -1,0 +1,437 @@
+:root {
+    --color-primary: #014EB8;
+    --color-gray: rgb(42, 42, 42);
+    --color-white: rgb(93, 93, 93);
+    --color-black-light: #111414;
+    --color-black-dark: #050606;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    color: var(--color-white);
+}
+
+body {
+    box-sizing: border-box;
+    /* background-color: rgb(0, 0, 0); */
+    background-color: #eee;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* .container {
+    height: 100vh;
+    position: absolute;
+} */
+/* --------------------- List ---------------------------- */
+
+.list {
+    height: 100vh;
+    /* position: absolute; */
+    /* background: linear-gradient(to bottom left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)),url('images/background.jpg') no-repeat;
+    background-size: cover;
+    background-position: center; */
+    position: absolute;
+    top: 50%;
+    left: 62%;
+    transform: translate(-50%, -50%);
+}
+
+.list__container {
+    width: 28rem;
+    height: 80vh;
+    background-color: var(--color-gray);
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    border-radius: 2.5rem;
+    -webkit-box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
+    -moz-box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
+    box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
+    /* border: 1px solid var(--color-primary); */
+    overflow: hidden;
+}
+
+.list__container-backBtn {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-black-light);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    -webkit-box-shadow: -2px -2px 20px 1px var(--color-white);
+    -moz-box-shadow:  -2px -2px 20px 1px var(--color-white);
+    box-shadow:  -2px -2px 20px 1px var(--color-white);
+    border: 3px solid var(--color-black-dark);
+    /* transform: scale(.8); */
+    /* transition: all .1s; */
+}
+
+.list__container-backBtn:hover {
+    /* transform: scale(1); */
+    cursor: pointer;
+    /* -webkit-box-shadow: 0px 0px 50px 0px var(--color-white);
+    -moz-box-shadow:  0px 0px 50px 0px var(--color-white);
+    box-shadow:  0px 0px 50px 0px var(--color-white); */
+}
+
+.list__container-backBtn > svg {
+    width: 50%;
+    height: 50%;
+    fill: var(--color-white);
+}
+
+.list__container-currentPlayingThumbnail {
+    width: 50%;
+    height: 28%;
+    text-align: center;
+    border-radius: 50%;
+    border: .5rem solid var(--color-black-dark);
+    background-size: cover;
+    overflow: hidden;
+    margin: 13% auto 3rem auto;
+    -webkit-box-shadow: -2px -2px 20px 1px var(--color-white);
+    -moz-box-shadow:  -2px -2px 20px 1px var(--color-white);
+    box-shadow:  -2px -2px 20px 1px var(--color-white);
+    transform: scale(.9);
+    transition: all .2s;
+}
+
+.list__container-currentPlayingThumbnail > img {
+    width: 100%;  
+}
+
+.list__container-currentPlayingThumbnail:hover {
+    cursor: pointer;
+    transform: scale(1);
+    -webkit-box-shadow: -2px -2px 10px 10px var(--color-white);
+    -moz-box-shadow:  -2px -2px 10px 10px var(--color-white);
+    box-shadow:  -2px -2px 10px 10px var(--color-white);
+}
+
+.list__container-songsList {
+    width: 106%;
+    height: calc(100% - 30%);
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-gap: 1rem;
+    overflow-y: scroll;
+    padding-right: 1.7rem;
+    /* padding: 2rem 2rem 0 2rem; */
+    box-sizing: content-box;
+    /*
+    Since the scrollbar width differs in different browsers, it is better to handle it with JavaScript. If you do Element.offsetWidth - Element.clientWidth, the exact scrollbar width will show up.
+    */
+}
+
+.list__container-songCard {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 4rem;
+    padding: 1rem 0;
+    border-radius: 2rem;
+}
+
+.list__container-songCard:hover {
+    background-color: var(--color-black-light);
+    cursor: pointer;
+}
+
+.list__container-songInfo {
+    color: rgb(211, 210, 210);
+    padding-left: 2rem;
+}
+
+.list__container-songInfo p:first-child {
+     font-size: 1.3rem;
+}
+
+.list__container-playPauseBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--color-black-light);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 0px 10px 0px var(--color-white);
+    -moz-box-shadow:  0px 0px 10px 0px var(--color-white);
+    box-shadow:  0px 0px 10px 0px var(--color-white);
+    border: 3px solid var(--color-black-dark);
+    transition: all .1s;
+    transform: scale(.8);
+}
+
+.list__container-songCard:hover .list__container-playPauseBtn {
+    transform: scale(1);
+}
+
+.list__container-songsList svg {
+    width: 50%;
+    height: 50%;
+    fill: var(--color-white);
+}
+
+.selected {
+    background-color: var(--color-black-dark);
+}
+
+.selected .list__container-playPauseBtn {
+    background-color: var(--color-primary);
+}
+
+.selected svg { 
+    fill: white; 
+}
+
+
+
+/* --------------------- Player ---------------------------- */
+
+.player {
+    height: 100vh;
+    position: absolute;
+    top: 45%;
+    left: 38%;
+    transform: translate(-50%, -50%);
+}
+
+.player__container {
+    width: 28rem;
+    height: 80vh;
+    background-color: var(--color-gray);
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 2.5rem;
+    -webkit-box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
+    -moz-box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
+    box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
+    border: 1px solid var(--color-primary);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 2rem 3rem 1fr 3rem 2rem;
+    grid-template-rows: 2rem 2.5rem 1rem 1fr 3rem 3rem 1rem 1rem 8rem 2rem;
+    grid-gap: 1rem;
+}
+
+.player__container-menuBtnDiv {
+    grid-column: 4 / span 1;
+    grid-row: 2 / span 1;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--color-black-light);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-radius: 50%;
+    -webkit-box-shadow: -2px -2px 20px 1px var(--color-white);
+    -moz-box-shadow:  -2px -2px 20px 1px var(--color-white);
+    box-shadow:  -2px -2px 20px 1px var(--color-white);
+    border: 3px solid var(--color-black-dark);
+    /* transform: scale(1);
+    transition: all .1s; */
+}
+
+.player__container-menuBtnDiv:hover {
+    /* transform: scale(1); */
+    cursor: pointer;
+    /* -webkit-box-shadow: 0px 0px 50px 0px var(--color-white);
+    -moz-box-shadow:  0px 0px 50px 0px var(--color-white);
+    box-shadow:  0px 0px 50px 0px var(--color-white); */
+}
+
+.player__container-menuBtnDiv > svg {
+    width: 50%;
+    height: 50%;
+    fill: var(--color-white);
+}
+
+.player__container-heading {
+    grid-column: 3 / span 1;
+    grid-row: 3 / span 1;
+    justify-self: center;
+    align-self: center;
+}
+
+.player__container-heading p {
+    font-size: 1.2rem; 
+    color: rgb(211, 210, 210);
+}
+
+.playing__container-currentPlayingThumbnail {
+    grid-column: 2 / span 3;
+    grid-row: 4 / span 1;
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    border-radius: 50%;
+    border: .5rem solid var(--color-black-dark);
+    background-size: contain;
+    overflow: hidden;
+    /* margin: 13% auto 3rem auto; */
+    -webkit-box-shadow: -2px -2px 20px 1px var(--color-white);
+    -moz-box-shadow:  -2px -2px 20px 1px var(--color-white);
+    box-shadow:  -2px -2px 20px 1px var(--color-white);
+    justify-self: center;
+}
+
+.playing__container-currentPlayingThumbnail > img {
+    width: 100%;  
+}
+
+.playing__container-songTitle {
+    grid-column: 2 / span 3;
+    grid-row: 5 / span 1;
+    justify-self: center;
+    align-self: center;
+    color: rgb(188, 188, 188);
+}
+
+.playing__container-songTitle p {
+    font-size: 1.4rem;
+}
+
+.playing__container-ArtistName {
+    grid-column: 2 / span 3;
+    grid-row: 6 / span 1;
+    justify-self: center;
+    align-self: flex-start;
+    font-size: 1.2rem;
+}
+
+.playing__container-timers {
+    grid-column: 2 / span 3;
+    grid-row: 7 / span 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    color: rgb(188, 188, 188);
+}
+
+.playing__container-durationTime {
+    justify-self: flex-end;
+}
+
+.playing__container-slider {
+    grid-column: 2 / span 3;
+    grid-row: 8 / span 1;
+    position: relative;
+}
+
+.slider__normalLine {
+    width: 100%;
+    height: 6px;
+    background-color: var(--color-black-dark);
+    box-shadow: 1px 1px 1px 0px rgb(73, 73, 73);
+    border-radius: 3px;
+}
+
+.slider__dot {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: radial-gradient(red, var(--color-primary), red);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    z-index: 2;
+}
+
+.slider__gradLine {
+    width: 50%;
+    height: 4px;
+    background-image: linear-gradient(to left, red, var(--color-primary));
+    position: absolute;
+    top: 4.1%;
+    left: 0;
+}
+
+.playing__container-controls {
+    grid-column: 2 / -2;
+    grid-row: 9 / span 1;
+    display: grid;
+    grid-template-columns: 7rem 1fr 7rem;
+}
+
+.playing__container-previousBtn,
+.playing__container-playBtn,
+.playing__container-pauseBtn,
+.playing__container-nextBtn {
+    width: 6rem;
+    height: 6rem;
+    background-color: var(--color-black-light);
+    border-radius: 50%;
+    -webkit-box-shadow: -2px -2px 20px 1px var(--color-white);
+    -moz-box-shadow:  -2px -2px 20px 1px var(--color-white);
+    box-shadow:  -2px -2px 20px 1px var(--color-white);
+    border: 3px solid var(--color-black-dark);
+    transform: scale(.8);
+    transition: all .1s;
+    align-self: center;
+    justify-self: center
+}
+
+.playing__container-previousBtn:hover,
+.playing__container-playBtn:hover,
+.playing__container-pauseBtn:hover,
+.playing__container-nextBtn:hover {
+    cursor: pointer;
+}
+
+.playing__container-previousBtn {
+    grid-column: 1 / span 1;
+}
+
+.playing__container-playBtn,
+.playing__container-pauseBtn {
+    grid-column: 2 / span 1;
+    width: 8rem;
+    height: 8rem;
+    background-color: var(--color-primary);
+}
+
+.playing__container-nextBtn {
+    grid-column: 3 / span 1;
+}
+
+.playing__container-previousBtn svg,
+.playing__container-nextBtn svg,
+.playing__container-playBtn svg,
+.playing__container-pauseBtn svg {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    fill: var(--color-white);
+}
+
+.playing__container-playBtn svg,
+.playing__container-pauseBtn svg {
+    fill: white;
+}
+
+.hidden {
+    display: none;
+}
+
+
