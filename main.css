@@ -21,23 +21,13 @@ html {
 
 body {
     box-sizing: border-box;
-    /* background-color: rgb(0, 0, 0); */
     background-color: #eee;
     font-family: 'Roboto', sans-serif;
 }
-
-/* .container {
-    height: 100vh;
-    position: absolute;
-} */
 /* --------------------- List ---------------------------- */
 
 .list {
     height: 100vh;
-    /* position: absolute; */
-    /* background: linear-gradient(to bottom left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)),url('images/background.jpg') no-repeat;
-    background-size: cover;
-    background-position: center; */
     position: absolute;
     top: 50%;
     left: 62%;
@@ -56,7 +46,6 @@ body {
     -webkit-box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
     -moz-box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
     box-shadow: 0px 0px 35px 1px rgba(128,128,128,1);
-    /* border: 1px solid var(--color-primary); */
     overflow: hidden;
 }
 
@@ -76,16 +65,10 @@ body {
     -moz-box-shadow:  -2px -2px 20px 1px var(--color-white);
     box-shadow:  -2px -2px 20px 1px var(--color-white);
     border: 3px solid var(--color-black-dark);
-    /* transform: scale(.8); */
-    /* transition: all .1s; */
 }
 
 .list__container-backBtn:hover {
-    /* transform: scale(1); */
     cursor: pointer;
-    /* -webkit-box-shadow: 0px 0px 50px 0px var(--color-white);
-    -moz-box-shadow:  0px 0px 50px 0px var(--color-white);
-    box-shadow:  0px 0px 50px 0px var(--color-white); */
 }
 
 .list__container-backBtn > svg {
@@ -130,7 +113,6 @@ body {
     grid-gap: 1rem;
     overflow-y: scroll;
     padding-right: 1.7rem;
-    /* padding: 2rem 2rem 0 2rem; */
     box-sizing: content-box;
     /*
     Since the scrollbar width differs in different browsers, it is better to handle it with JavaScript. If you do Element.offsetWidth - Element.clientWidth, the exact scrollbar width will show up.
@@ -199,8 +181,6 @@ body {
     fill: white; 
 }
 
-
-
 /* --------------------- Player ---------------------------- */
 
 .player {
@@ -246,16 +226,10 @@ body {
     -moz-box-shadow:  -2px -2px 20px 1px var(--color-white);
     box-shadow:  -2px -2px 20px 1px var(--color-white);
     border: 3px solid var(--color-black-dark);
-    /* transform: scale(1);
-    transition: all .1s; */
 }
 
 .player__container-menuBtnDiv:hover {
-    /* transform: scale(1); */
     cursor: pointer;
-    /* -webkit-box-shadow: 0px 0px 50px 0px var(--color-white);
-    -moz-box-shadow:  0px 0px 50px 0px var(--color-white);
-    box-shadow:  0px 0px 50px 0px var(--color-white); */
 }
 
 .player__container-menuBtnDiv > svg {
