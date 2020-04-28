@@ -289,6 +289,7 @@ body {
     background-color: var(--color-black-dark);
     box-shadow: 1px 1px 1px 0px rgb(73, 73, 73);
     border-radius: 3px;
+    overflow: hidden;
 }
 
 .slider__dot {
@@ -301,7 +302,7 @@ body {
     left: 0%;
     transform: translate(-50%, -27%);
     z-index: 2;
-    transition: all .2s;
+    /* transition: all .2s; */
 }
 
 @keyframes dotMoveRight {
@@ -318,9 +319,10 @@ body {
     height: 4px;
     background-color: var(--color-primary);
     position: absolute;
-    top: 4.1%;
+    top: 10%;
     left: 0%;
-    transition: all .2s;
+    border-radius: 3px;
+    /* transition: all .2s; */
 }
 
 @keyframes lineMoveRight {

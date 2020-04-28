@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web music player</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-    <div id="list" class="list">
+    <div id="list" class="list hidden">
         <div class="list__container">
             <div id="list__container-backBtn" class="list__container-backBtn">
                 <svg class="backBtn">
@@ -26,8 +30,9 @@
         </div>
     </div>
 
+    <!-- <div id="waveform"></div> -->
 
-    <div id="player" class="player hidden">
+    <div id="player" class="player">
         <div class="player__container">
             <div id="player__container-menuBtnDiv" class="player__container-menuBtnDiv">
                 <svg class="player__container-menuBtn">
@@ -44,19 +49,19 @@
             </div>
 
             <div id="playing__container-songTitle" class="playing__container-songTitle">
-                <p>Ajnabee</p>
+                <p></p>
             </div>
 
             <div id="playing__container-ArtistName" class="playing__container-ArtistName">
-                <p>Bhuvan Bam</p>
+                <p></p>
             </div>
 
             <div class="playing__container-timers">
                 <div id="playing__container-currentPlayingTime" class="playing__container-currentPlayingTime">
-                    <p>0:00</p>
+                    <p></p>
                 </div>
                 <div id="playing__container-durationTime" class="playing__container-durationTime hidden">
-                    <p>4:48</p>
+                    <p></p>
                 </div>
             </div>
 
@@ -93,9 +98,11 @@
             </div>
         </div>
     </div>
+    <!-- <script src="https://unpkg.com/wavesurfer.js"></script> -->
     <script src="scripts/songsList.js"></script>
     <script src="scripts/createDom.js"></script>
     <script src="main.js"></script>
+    <script src="scripts/functionality.js"></script>
 </body>
 
 </html>
