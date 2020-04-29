@@ -65,10 +65,17 @@ function init() {
     playerPreviousBtnDomElem.addEventListener('click', previousSongFunctionality);
     playerNextBtnDomElem.addEventListener('click', songEnded);
     seekEventDomElem.addEventListener('click', seekEventClickFunctionality);
-    seekEventDomElem.addEventListener('mousedown', seekEventDownFunctionality);
-    seekEventDomElem.addEventListener('mousemove', seekEventMoveFunctionality);
-    seekEventDomElem.addEventListener('mouseleave', seekEventEndFunctionality);
-    seekEventDomElem.addEventListener('mouseup', seekEventEndFunctionality);
+    if (isMobileDevice()) {
+        seekEventDomElem.addEventListener('touchstart', seekEventDownFunctionality);
+        seekEventDomElem.addEventListener('touchmove', seekEventMoveFunctionality);
+        seekEventDomElem.addEventListener('touchcancel', seekEventEndFunctionality);
+        seekEventDomElem.addEventListener('touchend', seekEventEndFunctionality);
+    } else {
+        seekEventDomElem.addEventListener('mousedown', seekEventDownFunctionality);
+        seekEventDomElem.addEventListener('mousemove', seekEventMoveFunctionality);
+        seekEventDomElem.addEventListener('mouseleave', seekEventEndFunctionality);
+        seekEventDomElem.addEventListener('mouseup', seekEventEndFunctionality);
+    }
     songCardNodeDomElem.forEach(card => {
         card.addEventListener('click', cardClickFunctinality)
     });

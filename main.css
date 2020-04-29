@@ -32,6 +32,12 @@ body {
   width: 0px;
 }
 
+*:focus {
+user-select: none;
+outline: none;
+outline: 0;
+}
+
 /* -------------------- Common Styles ---------------------- */
 .list__container, 
 .player__container {
@@ -345,6 +351,11 @@ body {
     transform: translate(0%,-40%);
     background-color: transparent;
     z-index: 3;
+    /* outline: 0 !important; */
+    -webkit-tap-highlight-color:transparent;
+    -moz-tap-highlight-color:transparent;
+    -o-tap-highlight-color:transparent;
+    tap-highlight-color:transparent;
 }
 
 .hoverPointer:hover {

@@ -19,7 +19,7 @@ function seekEventClickFunctionality(e) {
 * This function executes when mouse is pressed down on the seekbar.
 */
 function seekEventDownFunctionality() {
-    audio.duration ? modelObj.draggable = true : null;
+    audio.duration ? modelObj.draggable = true : modelObj.draggable = false;
 };
 /*
 * This function executes the mouse is dragged.
@@ -34,16 +34,25 @@ function seekEventMoveFunctionality(e) {
 * This function calculates based on the interaction.
 */
 function interactionStartCalculation(e) {
+    let xVal;
+    if (isMobileDevice()) {
+        if (e.changedTouches)
+            xVal = e.changedTouches[0].clientX; //for touch devices 
+        else
+            xVal = e.x;  //for touch devices but for click event.
+    }
+    else
+        xVal = e.x;
     clearInterval(modelObj.trackInterval);
     clearInterval(modelObj.currTimeInterval);
 
-    let sliderJumpTemp = ((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100)
+    let sliderJumpTemp = ((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100);
 
     let time = (sliderJumpTemp * audio.duration) / 100;
     currentPlayTimeDomElem.children[0].innerHTML = calculateTime(time);
 
-    if (e.x <= modelObj.dimensions.lineFinalValue) {
-        modelObj.dimensions.dotX = (e.x - (dotDomElem.getBoundingClientRect().width / 2));
+    if (xVal <= modelObj.dimensions.lineFinalValue) {
+        modelObj.dimensions.dotX = (xVal - (dotDomElem.getBoundingClientRect().width / 2));
     } else {
         modelObj.dimensions.dotX = modelObj.dimensions.lineFinalValue;
     };
@@ -130,6 +139,12 @@ function trackDom() {
         let value = (modelObj.sliderJumpInPercent * (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue) / 100) + modelObj.dimensions.lineInitialValue;
         modelObj.dimensions.dotX = value;
     }, (audio.duration * 10) / 4); // ((audio.duration / 100) * 1000) futher dividing it by 4 to increse the timeout.
+};
+/*
+* Detecting if its a mobile device.
+*/
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 /*
 * This function used to play the song.
