@@ -17,6 +17,8 @@ const listDomElem = document.getElementById('list'),
     artistNameDomElem = document.getElementById('playing__container-ArtistName'),
     currentPlayTimeDomElem = document.getElementById('playing__container-currentPlayingTime'),
     durationTimeDomElem = document.getElementById('playing__container-durationTime'),
+    sliderLineDomElem = document.getElementById('slider__normalLine'),
+    seekEventDomElem = document.getElementById('playing__continer-transparentLine'),
     dotDomElem = document.getElementById('slider__dot'),
     progressLineDomElem = document.getElementById('slider__gradLine'),
     playerPreviousBtnDomElem = document.getElementById('playing__container-previousBtn'),
@@ -39,12 +41,21 @@ const modelObj = {
     isSongRunning: false,
     sliderJumpInPercent: 0,
     currentSongNo: 0,
+    draggable: false,
+    seekable: false,
+    dimensions: {
+        dotX: dotDomElem.getBoundingClientRect().x,
+        lineInitialValue: sliderLineDomElem.getBoundingClientRect().x - (dotDomElem.getBoundingClientRect().width / 2),
+        lineFinalValue: ((sliderLineDomElem.getBoundingClientRect().x + sliderLineDomElem.getBoundingClientRect().width) - (dotDomElem.getBoundingClientRect().width / 2)),
+    },
 };
 /*
 * Creating audio instance.
 */
 const audio = new Audio();
-
+/*
+* Adding Event Listeneres.
+*/
 function init() {
     backBtnDomElem.addEventListener('click', navigateFunctionality);
     listThumbnailDomElem.addEventListener('click', navigateFunctionality);
@@ -53,6 +64,14 @@ function init() {
     playerPauseBtnDomElem.addEventListener('click', pauseBtnFunctionality);
     playerPreviousBtnDomElem.addEventListener('click', previousSongFunctionality);
     playerNextBtnDomElem.addEventListener('click', songEnded);
-    songCardNodeDomElem.forEach(card => { card.addEventListener('click', cardClickFunctinality) });
+    seekEventDomElem.addEventListener('click', seekEventClickFunctionality);
+    seekEventDomElem.addEventListener('mousedown', seekEventDownFunctionality);
+    seekEventDomElem.addEventListener('mousemove', seekEventMoveFunctionality);
+    seekEventDomElem.addEventListener('mouseleave', seekEventEndFunctionality);
+    seekEventDomElem.addEventListener('mouseup', seekEventEndFunctionality);
+    songCardNodeDomElem.forEach(card => {
+        card.addEventListener('click', cardClickFunctinality)
+    });
+
     renderDOM();
-}
+};

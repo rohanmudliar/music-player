@@ -6,6 +6,74 @@ function navigateFunctionality() {
     listDomElem.classList.toggle('hidden');
 };
 /*
+* This function executes when clicked on the seekbar.
+* @param e is of type object. It passes the event.
+*/
+function seekEventClickFunctionality(e) {
+    if (audio.duration) {
+        interactionStartCalculation(e);
+        interactionEndCalculation();
+    };
+};
+/*
+* This function executes when mouse is pressed down on the seekbar.
+*/
+function seekEventDownFunctionality() {
+    audio.duration ? modelObj.draggable = true : null;
+};
+/*
+* This function executes the mouse is dragged.
+*/
+function seekEventMoveFunctionality(e) {
+    if (modelObj.draggable) {
+        modelObj.seekable = true;
+        interactionStartCalculation(e);
+    };
+};
+/*
+* This function calculates based on the interaction.
+*/
+function interactionStartCalculation(e) {
+    clearInterval(modelObj.trackInterval);
+    clearInterval(modelObj.currTimeInterval);
+
+    let sliderJumpTemp = ((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100)
+
+    let time = (sliderJumpTemp * audio.duration) / 100;
+    currentPlayTimeDomElem.children[0].innerHTML = calculateTime(time);
+
+    if (e.x <= modelObj.dimensions.lineFinalValue) {
+        modelObj.dimensions.dotX = (e.x - (dotDomElem.getBoundingClientRect().width / 2));
+    } else {
+        modelObj.dimensions.dotX = modelObj.dimensions.lineFinalValue;
+    };
+};
+/*
+* This function executes when the mouse interaction is ended.
+*/
+function seekEventEndFunctionality() {
+    modelObj.draggable = false;
+    if (modelObj.seekable) {
+        if (audio.duration)
+            interactionEndCalculation();
+    };
+};
+/*
+* This function calculates when the seek event is ended.
+*/
+function interactionEndCalculation() {
+    let seekto = (((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100) * audio.duration) / 100;
+
+    audio.currentTime = seekto;
+    modelObj.seekable = false;
+    modelObj.sliderJumpInPercent = ((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100)
+
+    if (playerPlayBtnDomElem.classList.contains('hidden')) {
+        trackDom();
+        timersDom();
+    };
+};
+/*
 * This function is used to process the action when clicked on the list song cards.
 */
 function cardClickFunctinality() {
@@ -58,10 +126,10 @@ function calculateTime(_time) {
 */
 function trackDom() {
     modelObj.trackInterval = setInterval(() => {
-        modelObj.sliderJumpInPercent += .25
-        dotDomElem.style.left = `${modelObj.sliderJumpInPercent}%`;
-        progressLineDomElem.style.width = `${modelObj.sliderJumpInPercent}%`;
-    }, (audio.duration * 2.5)); // (((audio.duration / 100) * 1000) / 4)
+        modelObj.sliderJumpInPercent += .25;
+        let value = (modelObj.sliderJumpInPercent * (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue) / 100) + modelObj.dimensions.lineInitialValue;
+        modelObj.dimensions.dotX = value;
+    }, (audio.duration * 10) / 4); // ((audio.duration / 100) * 1000) futher dividing it by 4 to increse the timeout.
 };
 /*
 * This function used to play the song.
@@ -72,18 +140,20 @@ function playSongFunctionality() {
 
     if (!modelObj.isSongRunning) {
         resetTimersSliders();
-        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';
         link.href = `/images/favicons/${songsList[modelObj.currentPlayingSongNo].favIcon}.ico`;
         document.getElementsByTagName('head')[0].appendChild(link);
         audio.src = songsList[modelObj.currentPlayingSongNo].localsrc;
+
         audio.addEventListener("loadeddata", songLoaded);
         audio.addEventListener("ended", songEnded);
+        audio.addEventListener("error", songPlaybackError);
     } else {
         audio.play();
-        timersDom(audio);
-        trackDom(audio);
+        timersDom();
+        trackDom();
     };
     modelObj.isSameSongPlayed = true;
     togglelistPlayPauseBtn();
@@ -121,10 +191,7 @@ function resetTimersSliders() {
     clearInterval(modelObj.trackInterval);
     clearInterval(modelObj.currTimeInterval);
     modelObj.sliderJumpInPercent = 0;
-    // remove transistion class
-    dotDomElem.style.left = '0%';
-    progressLineDomElem.style.width = '0%';
-    // add transistion class
+    modelObj.dimensions.dotX = modelObj.dimensions.lineInitialValue;
     durationTimeDomElem.classList.add('hidden');
     currentPlayTimeDomElem.children[0].innerHTML = '0:00';
 };
@@ -133,8 +200,8 @@ function resetTimersSliders() {
 */
 function songLoaded() {
     modelObj.isSongRunning = true;
-    timersDom(audio);
-    trackDom(audio);
+    timersDom();
+    trackDom();
     audio.play();
 };
 /*
@@ -144,10 +211,18 @@ function songEnded() {
     resetTimersSliders();
     audio.removeEventListener("loadeddata", songLoaded);
     audio.removeEventListener("ended", songEnded);
+    modelObj.draggable = false;
+    modelObj.seekable = false;
     modelObj.isSongRunning = false;
+    nextSongFunctionality();
+};
+/*
+* This function executes when there is an error.
+*/
+function songPlaybackError() {
     clearInterval(modelObj.trackInterval);
     clearInterval(modelObj.currTimeInterval);
-    nextSongFunctionality();
+    alert('Please check your internet Connection');
 };
 /*
 * This setInterval checks for any changes made in the currentSong.
@@ -157,6 +232,12 @@ setInterval(() => {
         renderDOM();
         modelObj.currentSong = modelObj.currentPlayingSongNo;
     };
+
+    audio.duration ? seekEventDomElem.classList.add('hoverPointer') : seekEventDomElem.classList.remove('hoverPointer');
+
+    var value = (Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100;
+    dotDomElem.style.left = `${value}%`;
+    progressLineDomElem.style.width = `${value}%`;
 }, 10);
 /*
 * This funciton is used to render the DOM based on selction of the song.
