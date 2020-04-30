@@ -4,6 +4,7 @@
 // Created on : 26/04/2020
 // ////////////////////////////////////////////////////////////////////////////////////
 window.onload = () => init();
+window.addEventListener('resize', () => location.reload());
 /*
 * Initializing the domVariables.
 */
@@ -18,7 +19,7 @@ const listDomElem = document.getElementById('list'),
     currentPlayTimeDomElem = document.getElementById('playing__container-currentPlayingTime'),
     durationTimeDomElem = document.getElementById('playing__container-durationTime'),
     sliderLineDomElem = document.getElementById('slider__normalLine'),
-    seekEventDomElem = document.getElementById('playing__continer-transparentLine'),
+    seekEventDomElem = document.getElementById('playing__container-transparentLine'),
     dotDomElem = document.getElementById('slider__dot'),
     progressLineDomElem = document.getElementById('slider__gradLine'),
     playerPreviousBtnDomElem = document.getElementById('playing__container-previousBtn'),
@@ -54,7 +55,7 @@ const modelObj = {
 */
 const audio = new Audio();
 /*
-* Adding Event Listeneres.
+* Adding Event Listeners.
 */
 function init() {
     backBtnDomElem.addEventListener('click', navigateFunctionality);
@@ -77,7 +78,7 @@ function init() {
         seekEventDomElem.addEventListener('mouseup', seekEventEndFunctionality);
     }
     songCardNodeDomElem.forEach(card => {
-        card.addEventListener('click', cardClickFunctinality)
+        card.addEventListener('click', cardClickFunctionality)
     });
 
     renderDOM();

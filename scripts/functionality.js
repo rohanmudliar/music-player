@@ -1,12 +1,12 @@
 /*
-* This function alows user to switch between player and list dom.
+* This function allows user to switch between player and list dom.
 */
 function navigateFunctionality() {
     playerDomElem.classList.toggle('hidden');
     listDomElem.classList.toggle('hidden');
 };
 /*
-* This function executes when clicked on the seekbar.
+* This function executes when clicked on the seekBar.
 * @param e is of type object. It passes the event.
 */
 function seekEventClickFunctionality(e) {
@@ -16,7 +16,7 @@ function seekEventClickFunctionality(e) {
     };
 };
 /*
-* This function executes when mouse is pressed down on the seekbar.
+* This function executes when mouse is pressed down on the seekBar.
 */
 function seekEventDownFunctionality() {
     audio.duration ? modelObj.draggable = true : modelObj.draggable = false;
@@ -71,9 +71,9 @@ function seekEventEndFunctionality() {
 * This function calculates when the seek event is ended.
 */
 function interactionEndCalculation() {
-    let seekto = (((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100) * audio.duration) / 100;
+    let seekTo = (((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100) * audio.duration) / 100;
 
-    audio.currentTime = seekto;
+    audio.currentTime = seekTo;
     modelObj.seekable = false;
     modelObj.sliderJumpInPercent = ((Math.abs(modelObj.dimensions.dotX - modelObj.dimensions.lineInitialValue) / (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue)) * 100)
 
@@ -85,7 +85,7 @@ function interactionEndCalculation() {
 /*
 * This function is used to process the action when clicked on the list song cards.
 */
-function cardClickFunctinality() {
+function cardClickFunctionality() {
     modelObj.currentPlayingSongNo = Number(this.getAttribute("datacardno"));
     if (modelObj.currentSong !== modelObj.currentPlayingSongNo) {
         modelObj.isSongRunning = false;
@@ -131,14 +131,14 @@ function calculateTime(_time) {
     return `${mins}:${seconds}`;
 };
 /*
-* This function updates the DOM element of seekbar and dot.
+* This function updates the DOM element of seekBar and dot.
 */
 function trackDom() {
     modelObj.trackInterval = setInterval(() => {
         modelObj.sliderJumpInPercent += .25;
         let value = (modelObj.sliderJumpInPercent * (modelObj.dimensions.lineFinalValue - modelObj.dimensions.lineInitialValue) / 100) + modelObj.dimensions.lineInitialValue;
         modelObj.dimensions.dotX = value;
-    }, (audio.duration * 10) / 4); // ((audio.duration / 100) * 1000) futher dividing it by 4 to increse the timeout.
+    }, (audio.duration * 10) / 4); // ((audio.duration / 100) * 1000) further dividing it by 4 to increase the timeout.
 };
 /*
 * Detecting if its a mobile device.
@@ -155,13 +155,14 @@ function playSongFunctionality() {
 
     if (!modelObj.isSongRunning) {
         resetTimersSliders();
+
         let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';
         link.href = `/images/favicons/${songsList[modelObj.currentPlayingSongNo].favIcon}.ico`;
         document.getElementsByTagName('head')[0].appendChild(link);
-        audio.src = songsList[modelObj.currentPlayingSongNo].localsrc;
 
+        audio.src = songsList[modelObj.currentPlayingSongNo].localsrc;
         audio.addEventListener("loadeddata", songLoaded);
         audio.addEventListener("ended", songEnded);
         audio.addEventListener("error", songPlaybackError);
@@ -171,7 +172,7 @@ function playSongFunctionality() {
         trackDom();
     };
     modelObj.isSameSongPlayed = true;
-    togglelistPlayPauseBtn();
+    toggleListPlayPauseBtn();
 };
 /*
 * This function used to pause the song.
@@ -183,7 +184,7 @@ function pauseBtnFunctionality() {
     playerPauseBtnDomElem.classList.add('hidden');
     audio.pause();
     modelObj.isSameSongPlayed = false;
-    togglelistPlayPauseBtn();
+    toggleListPlayPauseBtn();
 };
 /*
 * This function used to play the previous song.
@@ -255,7 +256,7 @@ setInterval(() => {
     progressLineDomElem.style.width = `${value}%`;
 }, 10);
 /*
-* This funciton is used to render the DOM based on selction of the song.
+* This function is used to render the DOM based on selection of the song.
 */
 function renderDOM() {
     modelObj.isSongRunning = false;
@@ -276,9 +277,9 @@ function renderDOM() {
     modelObj.previousSelectedCardNo = modelObj.currentPlayingSongNo;
 };
 /*
-* This funciton is used to toggle play pause button on the list based on interaction.
+* This function is used to toggle play pause button on the list based on interaction.
 */
-function togglelistPlayPauseBtn() {
+function toggleListPlayPauseBtn() {
     let playBtn = songCardNodeDomElem[modelObj.currentPlayingSongNo].children[1].children[0];
     let pauseBtn = songCardNodeDomElem[modelObj.currentPlayingSongNo].children[1].children[1];
     if (playerPlayBtnDomElem.classList.contains('hidden')) {

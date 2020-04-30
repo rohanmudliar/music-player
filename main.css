@@ -118,7 +118,7 @@ outline: 0;
     display: grid;
     grid-auto-rows: min-content;
     grid-gap: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 0;
     box-sizing: content-box;
     /*
@@ -343,7 +343,7 @@ outline: 0;
     }
 }
 
-.playing__continer-transparentLine {
+.playing__container-transparentLine {
     grid-column: 2 / span 3;
     grid-row: 8 / span 1;
     width: 100%;
