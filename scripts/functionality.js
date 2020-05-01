@@ -159,7 +159,7 @@ function playSongFunctionality() {
         let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';
-        link.href = `/images/favicons/${songsList[modelObj.currentPlayingSongNo].favIcon}.ico`;
+        link.href = `./images/favicons/${songsList[modelObj.currentPlayingSongNo].favIcon}.ico`;
         document.getElementsByTagName('head')[0].appendChild(link);
 
         audio.src = songsList[modelObj.currentPlayingSongNo].localsrc;
