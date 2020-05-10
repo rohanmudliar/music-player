@@ -3,12 +3,29 @@
 // Name : Music Player
 // Created on : 26/04/2020
 // ////////////////////////////////////////////////////////////////////////////////////
+import { createDom } from './createDom';
+import {
+    navigateFunctionality,
+    seekEventClickFunctionality,
+    seekEventDownFunctionality,
+    seekEventMoveFunctionality,
+    seekEventEndFunctionality,
+    cardClickFunctionality,
+    isMobileDevice,
+    playSongFunctionality,
+    pauseBtnFunctionality,
+    previousSongFunctionality,
+    renderDOM,
+    songEnded,
+} from './functionality';
+
+createDom();
 window.onload = () => init();
 window.addEventListener('resize', () => location.reload());
 /*
 * Initializing the domVariables.
 */
-const listDomElem = document.getElementById('list'),
+export const listDomElem = document.getElementById('list'),
     playerDomElem = document.getElementById('player'),
     backBtnDomElem = document.getElementById('list__container-backBtn'),
     menuBtnDomElem = document.getElementById('player__container-menuBtnDiv'),
@@ -30,7 +47,7 @@ const listDomElem = document.getElementById('list'),
 /*
 * Initializing the public Variables.
 */
-const modelObj = {
+export const modelObj = {
     previousSelectedCardNo: 0,
     previousCard: null,
     currentCardSelected: null,
@@ -53,7 +70,7 @@ const modelObj = {
 /*
 * Creating audio instance.
 */
-const audio = new Audio();
+export const audio = new Audio();
 /*
 * Adding Event Listeners.
 */

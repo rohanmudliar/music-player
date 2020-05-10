@@ -1,0 +1,28 @@
+{
+  "name": "music-player",
+  "version": "1.0.0",
+  "description": "A self learning project to create a music application",
+  "main": "main.js",
+  "scripts": {
+    "dev": "webpack --watch --mode=development",
+    "prod": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohanmudliar/music-player.git"
+  },
+  "keywords": [],
+  "author": "Rohan Mudliar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rohanmudliar/music-player/issues"
+  },
+  "homepage": "https://github.com/rohanmudliar/music-player#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "path": "^0.12.7",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

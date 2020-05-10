@@ -1,4 +1,4 @@
-const songsList = [
+export const songsList = [
     {
         "title": "Dil Chahta Hai",
         "artistName": "Shankar Mahadevan",

@@ -1,8 +1,11 @@
-let songCards = [];
+import { songsList } from './songsList';
+export let songListTag;
+export function createDom() {
+    let songCards = [];
 
-songsList.forEach((song, i) => {
-    songCards.push(
-        `<div id="list__container-songCard" class="list__container-songCard" datacardno="${i}">
+    songsList.forEach((song, i) => {
+        songCards.push(
+            `<div id="list__container-songCard" class="list__container-songCard" datacardno="${i}">
             <div class="list__container-songInfo">
                 <p class="list__container-songTitle">
                     ${song.title}
@@ -20,9 +23,10 @@ songsList.forEach((song, i) => {
                 </svg>
             </div>
         </div>`
-    );
-});
+        );
+    });
 
-const songListTag = document.getElementById('list__container-songsList');
+    songListTag = document.getElementById('list__container-songsList');
 
-songListTag.innerHTML = songCards.join('');
+    songListTag.innerHTML = songCards.join('');
+};

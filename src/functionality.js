@@ -1,7 +1,27 @@
+import { songListTag } from './createDom';
+import { songsList } from './songsList';
+import {
+    listDomElem,
+    playerDomElem,
+    listThumbnailDomElem,
+    playerThumbnailDomElem,
+    songTitleDomElem,
+    artistNameDomElem,
+    currentPlayTimeDomElem,
+    durationTimeDomElem,
+    seekEventDomElem,
+    dotDomElem,
+    progressLineDomElem,
+    playerPlayBtnDomElem,
+    playerPauseBtnDomElem,
+    songCardNodeDomElem,
+    modelObj,
+    audio
+} from './index';
 /*
 * This function allows user to switch between player and list dom.
 */
-function navigateFunctionality() {
+export function navigateFunctionality() {
     playerDomElem.classList.toggle('hidden');
     listDomElem.classList.toggle('hidden');
 };
@@ -9,7 +29,7 @@ function navigateFunctionality() {
 * This function executes when clicked on the seekBar.
 * @param e is of type object. It passes the event.
 */
-function seekEventClickFunctionality(e) {
+export function seekEventClickFunctionality(e) {
     if (audio.duration) {
         interactionStartCalculation(e);
         interactionEndCalculation();
@@ -18,13 +38,13 @@ function seekEventClickFunctionality(e) {
 /*
 * This function executes when mouse is pressed down on the seekBar.
 */
-function seekEventDownFunctionality() {
+export function seekEventDownFunctionality() {
     audio.duration ? modelObj.draggable = true : modelObj.draggable = false;
 };
 /*
 * This function executes the mouse is dragged.
 */
-function seekEventMoveFunctionality(e) {
+export function seekEventMoveFunctionality(e) {
     if (modelObj.draggable) {
         modelObj.seekable = true;
         interactionStartCalculation(e);
@@ -60,7 +80,7 @@ function interactionStartCalculation(e) {
 /*
 * This function executes when the mouse interaction is ended.
 */
-function seekEventEndFunctionality() {
+export function seekEventEndFunctionality() {
     modelObj.draggable = false;
     if (modelObj.seekable) {
         if (audio.duration)
@@ -85,7 +105,7 @@ function interactionEndCalculation() {
 /*
 * This function is used to process the action when clicked on the list song cards.
 */
-function cardClickFunctionality() {
+export function cardClickFunctionality() {
     modelObj.currentPlayingSongNo = Number(this.getAttribute("datacardno"));
     if (modelObj.currentSong !== modelObj.currentPlayingSongNo) {
         modelObj.isSongRunning = false;
@@ -143,13 +163,13 @@ function trackDom() {
 /*
 * Detecting if its a mobile device.
 */
-function isMobileDevice() {
+export function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 /*
 * This function used to play the song.
 */
-function playSongFunctionality() {
+export function playSongFunctionality() {
     playerPlayBtnDomElem.classList.add('hidden');
     playerPauseBtnDomElem.classList.remove('hidden');
 
@@ -177,7 +197,7 @@ function playSongFunctionality() {
 /*
 * This function used to pause the song.
 */
-function pauseBtnFunctionality() {
+export function pauseBtnFunctionality() {
     clearInterval(modelObj.trackInterval);
     clearInterval(modelObj.currTimeInterval);
     playerPlayBtnDomElem.classList.remove('hidden');
@@ -189,7 +209,7 @@ function pauseBtnFunctionality() {
 /*
 * This function used to play the previous song.
 */
-function previousSongFunctionality() {
+export function previousSongFunctionality() {
     resetTimersSliders();
     modelObj.isSongRunning = false;
     if (audio.currentTime <= 3) {
@@ -223,7 +243,7 @@ function songLoaded() {
 /*
 * This function is executed when the current playing song has ended.
 */
-function songEnded() {
+export function songEnded() {
     resetTimersSliders();
     audio.removeEventListener("loadeddata", songLoaded);
     audio.removeEventListener("ended", songEnded);
@@ -258,7 +278,7 @@ setInterval(() => {
 /*
 * This function is used to render the DOM based on selection of the song.
 */
-function renderDOM() {
+export function renderDOM() {
     modelObj.isSongRunning = false;
 
     modelObj.previousCard = songListTag.children[modelObj.previousSelectedCardNo];
